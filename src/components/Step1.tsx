@@ -1,15 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import StepHeader from "./StepHeader";
 
 const Step1 = () => {
   return (
-    <div className="flex flex-col gap-8 w-full">
-      <div className="flex flex-col gap-4 items-start">
-        <h1 className="text-3xl font-bold">Personal info</h1>
-        <p className="text-slate-400 text-md font-medium">
-          Please provide your name, email address and phone number.
-        </p>
-      </div>
+    <>
+      <StepHeader
+        title="Personal info"
+        description="Please provide your name, email address and phone number."
+      />
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <Label
@@ -47,7 +46,7 @@ const Step1 = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

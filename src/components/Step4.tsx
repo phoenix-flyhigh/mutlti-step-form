@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
+import StepHeader from "./StepHeader";
 
 const Step4 = () => {
   const selectedPlan = {
@@ -18,13 +19,11 @@ const Step4 = () => {
     },
   ];
   return (
-    <div className="flex flex-col gap-8 w-full h-full">
-      <div className="flex flex-col gap-4 items-start">
-        <h1 className="text-3xl font-bold">Finishing up</h1>
-        <p className="text-slate-400 text-md font-medium">
-          Double-check everything looks OK before confirming.
-        </p>
-      </div>
+    <>
+      <StepHeader
+        title="Finishing up"
+        description="Double-check everything looks OK before confirming."
+      />
       <div className="flex flex-col bg-slate-100 rounded-lg gap-4 p-4">
         <div className="flex justify-between items-center">
           <div className="flex flex-col justify-start gap-0">
@@ -59,7 +58,7 @@ const Step4 = () => {
         </p>
         <p className="text-lg font-bold text-purplish-blue">+$12/mo</p>
       </div>
-    </div>
+    </>
   );
 };
 

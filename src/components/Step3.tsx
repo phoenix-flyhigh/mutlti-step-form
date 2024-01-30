@@ -3,16 +3,15 @@
 import React from "react";
 import { AddOns } from "@/data/AddOns";
 import AddOnOption from "./AddOnOption";
+import StepHeader from "./StepHeader";
 
 const Step3 = () => {
   return (
-    <div className="flex flex-col gap-8 w-full h-full">
-      <div className="flex flex-col gap-4 items-start">
-        <h1 className="text-3xl font-bold">Pick add-ons</h1>
-        <p className="text-slate-400 text-md font-medium">
-          Add-ons help enhance your gaming experience.
-        </p>
-      </div>
+    <>
+      <StepHeader
+        title="Pick add-ons"
+        description="Add-ons help enhance your gaming experience."
+      />
       <div className="flex flex-col gap-4">
         {AddOns.map((addOn) => (
           <AddOnOption
@@ -24,7 +23,7 @@ const Step3 = () => {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
