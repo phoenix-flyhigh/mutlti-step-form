@@ -12,7 +12,7 @@ const Step2 = () => {
         title="Select your plan"
         description="You have the option of monthly or yearly billing."
       />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-col gap-2 md:gap-auto md:flex-row">
         {subscriptionPlans.map((plan) => (
           <Card
             key={plan.title}

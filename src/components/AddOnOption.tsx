@@ -23,8 +23,8 @@ const AddOnOption: React.FC<AddOnOptionProps> = ({
       <div className="flex gap-4 items-center">
         <Checkbox checked />
         <div className="flex flex-col">
-          <p className="text-lg font-semibold text-marine-blue">{title}</p>
-          <p className="text-md text-cool-gray">{description}</p>
+          <p className="text-md md:text-lg font-semibold text-marine-blue">{title}</p>
+          <p className="text-sm md:text-md text-cool-gray">{description}</p>
         </div>
       </div>
       <p className="text-purplish-blue">+{cost}</p>

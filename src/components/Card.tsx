@@ -17,7 +17,7 @@ interface CardProps {
   }: CardProps) => {
     return (
       <div
-        className={`min-w-[30%] min-h-44 flex flex-col justify-between py-4 px-3 items-start rounded-lg border-2 ${
+        className={`w-full gap-4 p-2 items-center justify-start md:min-w-[30%] md:min-h-44 flex md:flex-col md:justify-between md:py-4 md:px-3 md:items-start rounded-lg border-2 ${
           selected ? "bg-gray-100 border-purplish-blue" : "border-cool-gray"
         } hover:border-purplish-blue cursor-pointer`}
       >
