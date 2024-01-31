@@ -34,6 +34,7 @@ export interface FormContextReturnProps extends useHandleStepsReturnType {
   watch: UseFormWatch<MultiStepFormData>;
   getValues: UseFormGetValues<MultiStepFormData>;
   errors: FieldErrors<MultiStepFormData>;
+  isSubmitSuccessful: boolean;
 }
 
 export const FormContext = createContext<FormContextReturnProps>(
@@ -58,7 +59,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     handleSubmit,
     watch,
     getValues,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = form;
   const { currentFormStep, handleGoBack, handleNext } = useHandleSteps();
 
@@ -72,6 +73,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     watch,
     getValues,
     errors,
+    isSubmitSuccessful,
   };
 
   return (

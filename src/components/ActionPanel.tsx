@@ -7,7 +7,7 @@ const ActionPanel = () => {
 
   return (
     <>
-      {currentFormStep > 1 && (
+      {currentFormStep > 1 && currentFormStep < 5 && (
         <div className="md:p-0 text-lg font-semibold flex justify-between items-center w-full bg-white p-2">
           {currentFormStep !== 1 && (
             <Button

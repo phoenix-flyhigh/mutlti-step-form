@@ -9,7 +9,7 @@ export interface useHandleStepsReturnType {
 }
 
 export const useHandleSteps: () => useHandleStepsReturnType = () => {
-  const TOTAL_NUMBER_STEPS = 4;
+  const TOTAL_NUMBER_STEPS = 5;
   const [currentFormStep, setCurrentFormStep] = useState<number>(1);
 
   const handleGoBack = () => {

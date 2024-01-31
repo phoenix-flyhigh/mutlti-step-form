@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
@@ -7,11 +7,22 @@ import ActionPanel from "./ActionPanel";
 import { FormContext, MultiStepFormData } from "@/context/FormContextProvider";
 import { SubmitHandler } from "react-hook-form";
 import { Form } from "./ui/form";
+import Step5 from "./Step5";
 
 const MultiStepForm = () => {
-  const { form, handleSubmit, currentFormStep } = useContext(FormContext);
+  const {
+    form,
+    handleSubmit,
+    currentFormStep,
+    isSubmitSuccessful,
+    handleNext,
+  } = useContext(FormContext);
   const onSubmit: SubmitHandler<MultiStepFormData> = (data) =>
     console.log(data);
+
+  useEffect(() => {
+    if (isSubmitSuccessful) handleNext();
+  }, [isSubmitSuccessful, handleNext]);
 
   return (
     <Form {...form}>
@@ -51,6 +62,13 @@ const MultiStepForm = () => {
           </div>
         </>
         <ActionPanel />
+        <div
+          className={`${
+            currentFormStep === 5 ? "flex" : "hidden"
+          } flex-col gap-8 md:w-full md:h-full bg-white z-10 p-4 md:p-0 rounded-xl md:rounded-none m-4 md:m-0`}
+        >
+          <Step5 />
+        </div>
       </form>
     </Form>
   );
