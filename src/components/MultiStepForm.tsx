@@ -18,6 +18,7 @@ const MultiStepForm = () => {
       <form
         className="z-10 flex flex-col justify-between md:w-full"
         onSubmit={handleSubmit(onSubmit)}
+        noValidate
       >
         <>
           <div

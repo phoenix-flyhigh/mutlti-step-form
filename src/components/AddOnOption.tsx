@@ -22,36 +22,36 @@ const AddOnOption: React.FC<AddOnOptionProps> = ({
 }: AddOnOptionProps) => {
   return (
     <FormItem key={title}>
-      <div
-        className={`flex justify-between items-center  border-2 rounded-lg px-5 py-3  ${
-          selected ? "bg-slate-100 border-purplish-blue" : "border-light-gray"
-        }`}
-      >
-        <div className="flex gap-4 items-center">
-          <FormControl>
-            <Checkbox
-              id={title}
-              checked={field.value?.includes(title)}
-              onCheckedChange={(checked) => {
-                return checked
-                  ? field.onChange([...field.value, title])
-                  : field.onChange(
-                      field.value?.filter((value) => value !== title)
-                    );
-              }}
-            />
-          </FormControl>
-          <Label htmlFor={title}>
+      <Label htmlFor={title}>
+        <div
+          className={`flex justify-between items-center  border-2 rounded-lg px-5 py-3  ${
+            selected ? "bg-slate-100 border-purplish-blue" : "border-light-gray"
+          }`}
+        >
+          <div className="flex gap-4 items-center">
+            <FormControl>
+              <Checkbox
+                id={title}
+                checked={field.value?.includes(title)}
+                onCheckedChange={(checked) => {
+                  return checked
+                    ? field.onChange([...field.value, title])
+                    : field.onChange(
+                        field.value?.filter((value) => value !== title)
+                      );
+                }}
+              />
+            </FormControl>
             <div className="flex flex-col">
               <p className="text-md md:text-lg font-semibold text-marine-blue">
                 {title}
               </p>
               <p className="text-sm md:text-md text-cool-gray">{description}</p>
             </div>
-          </Label>
+          </div>
+          <p className="text-purplish-blue">+{cost}</p>
         </div>
-        <p className="text-purplish-blue">+{cost}</p>
-      </div>
+      </Label>
     </FormItem>
   );
 };

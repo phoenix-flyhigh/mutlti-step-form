@@ -1,23 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "./ui/button";
 import StepHeader from "./StepHeader";
+import { FormContext } from "@/context/FormContextProvider";
+import { subscriptionPlans } from "@/data/Plans";
+import { AddOns } from "@/data/AddOns";
 
 const Step4 = () => {
+  const { getValues } = useContext(FormContext);
+  const isYearPlan = getValues("isYearly");
+
+  const selectedSubscriptionTitle = getValues("subscription");
+  const selectedSubscription = subscriptionPlans.find(
+    (plan) => plan.title === selectedSubscriptionTitle
+  );
+
   const selectedPlan = {
-    title: "Arcade",
-    type: "Monthly",
-    cost: "$9/mo",
+    title: selectedSubscription?.title,
+    type: isYearPlan ? "Yearly" : "Monthly",
+    cost: `$${
+      isYearPlan
+        ? selectedSubscription?.yearlySubscription
+        : selectedSubscription?.monthlySubscription
+    }/${isYearPlan ? "yr" : "mo"}`,
   };
-  const selectedAddOns = [
-    {
-      title: "Online service",
-      cost: "$1/mo",
-    },
-    {
-      title: "Larger storage",
-      cost: "$2/mo",
-    },
-  ];
+
+  const includedAddOnTitles = getValues("addOns");
+  const includedAddOns = AddOns.filter((addOn) =>
+    includedAddOnTitles.includes(addOn.title)
+  );
+
+  const selectedAddOns = includedAddOns.map((addOn) => ({
+    title: addOn.title,
+    cost: `$${isYearPlan ? addOn.yearlyCost : addOn.monthlyCost}/${
+      isYearPlan ? "yr" : "mo"
+    }`,
+  }));
+
+  const totalMonthlyCost =
+    (selectedSubscription?.monthlySubscription ?? 0) +
+    includedAddOns.reduce((sum, addOn) => (sum += addOn.monthlyCost), 0);
+
+  const totalYearlyCost =
+    (selectedSubscription?.yearlySubscription ?? 0) +
+    includedAddOns.reduce((sum, addOn) => (sum += addOn.yearlyCost), 0);
+
+  const totalCost = isYearPlan ? totalYearlyCost : totalMonthlyCost;
+  const totalCostText = `$${totalCost}/${isYearPlan ? "yr" : "mo"}`;
+
   return (
     <>
       <StepHeader
@@ -56,7 +85,7 @@ const Step4 = () => {
         <p className="text-md text-cool-gray">
           {`Total(${selectedPlan.type})`}
         </p>
-        <p className="text-lg font-bold text-purplish-blue">+$12/mo</p>
+        <p className="text-lg font-bold text-purplish-blue">{totalCostText}</p>
       </div>
     </>
   );

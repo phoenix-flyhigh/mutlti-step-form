@@ -8,7 +8,8 @@ import { FormField, FormItem } from "./ui/form";
 import { FormContext } from "@/context/FormContextProvider";
 
 const Step3 = () => {
-  const { form } = useContext(FormContext);
+  const { form, getValues } = useContext(FormContext);
+  const isYearPlan = getValues("isYearly");
 
   return (
     <>
@@ -31,9 +32,11 @@ const Step3 = () => {
                     <AddOnOption
                       title={addOn.title}
                       description={addOn.description}
-                      cost={addOn.monthlyCost}
+                      cost={`$${
+                        isYearPlan ? addOn.yearlyCost : addOn.monthlyCost
+                      }/${isYearPlan ? "yr" : "mo"}`}
                       field={field}
-                      selected
+                      selected={getValues("addOns").includes(addOn.title)}
                     />
                   )}
                 />

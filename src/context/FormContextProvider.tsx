@@ -5,6 +5,7 @@ import {
 import { ReactNode, createContext } from "react";
 import {
   FieldErrors,
+  UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormReturn,
@@ -26,6 +27,7 @@ export interface FormContextReturnProps extends useHandleStepsReturnType {
   register: UseFormRegister<MultiStepFormData>;
   handleSubmit: UseFormHandleSubmit<MultiStepFormData, undefined>;
   watch: UseFormWatch<MultiStepFormData>;
+  getValues: UseFormGetValues<MultiStepFormData>;
   errors: FieldErrors<MultiStepFormData>;
 }
 
@@ -39,15 +41,16 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
       username: "",
       emailAddress: "",
       phoneNumber: "",
-      subscription: "",
+      subscription: "Arcade",
       isYearly: false,
-      addOns: [],
+      addOns: ["Online service", "Larger storage"],
     },
   });
   const {
     register,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = form;
   const { currentFormStep, handleGoBack, handleNext } = useHandleSteps();
@@ -60,6 +63,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     register,
     handleSubmit,
     watch,
+    getValues,
     errors,
   };
 

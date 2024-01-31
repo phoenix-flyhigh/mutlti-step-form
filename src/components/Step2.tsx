@@ -9,8 +9,9 @@ import { FormContext } from "@/context/FormContextProvider";
 import { FormField, FormItem, FormControl } from "./ui/form";
 
 const Step2 = () => {
-  const { form } = useContext(FormContext);
+  const { form, getValues } = useContext(FormContext);
 
+  const isYearPlan = getValues("isYearly");
   return (
     <>
       <StepHeader
@@ -36,14 +37,19 @@ const Step2 = () => {
                           <RadioGroupItem
                             value={plan.title}
                             id={plan.title}
-                            className="absolute appearance-none"
+                            className="absolute opacity-0"
                           />
                         </FormControl>
                         <Label htmlFor={plan.title}>
                           <Card
                             title={plan.title}
-                            subscription={plan.monthlySubscription}
+                            subscription={`$${
+                              isYearPlan
+                                ? plan.yearlySubscription
+                                : plan.monthlySubscription
+                            }/${isYearPlan ? "yr" : "mo"}`}
                             iconUrl={plan.iconUrl}
+                            selected={getValues("subscription") === plan.title}
                           />
                         </Label>
                       </FormItem>

@@ -1,27 +1,27 @@
 export interface SubscriptionPlan {
-    title: string;
-    monthlySubscription: string;
-    iconUrl: string;
-    yearlySubscription: string;
+  title: string;
+  monthlySubscription: number;
+  iconUrl: string;
+  yearlySubscription: number;
 }
 
 export const subscriptionPlans: SubscriptionPlan[] = [
   {
     title: "Arcade",
-    monthlySubscription: "$9/mo",
+    monthlySubscription: 9,
     iconUrl: "/images/icon-arcade.svg",
-    yearlySubscription: "$90/yr",
+    yearlySubscription: 90,
   },
   {
     title: "Advanced",
-    monthlySubscription: "$12/mo",
+    monthlySubscription: 12,
     iconUrl: "/images/icon-advanced.svg",
-    yearlySubscription: "$120/yr",
+    yearlySubscription: 120,
   },
   {
     title: "Pro",
-    monthlySubscription: "$15/mo",
+    monthlySubscription: 15,
     iconUrl: "/images/icon-pro.svg",
-    yearlySubscription: "$150/yr",
+    yearlySubscription: 150,
   },
 ];
