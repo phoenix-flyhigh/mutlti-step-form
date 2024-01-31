@@ -4,7 +4,7 @@ import { FormContext } from "@/context/FormContextProvider";
 
 const ActionPanel = () => {
   const { currentFormStep, handleGoBack, handleNext } = useContext(FormContext);
-  
+
   return (
     <>
       {currentFormStep > 1 && (
@@ -21,7 +21,7 @@ const ActionPanel = () => {
           )}
           {currentFormStep < 4 && (
             <Button
-              className="bg-marine-blue text-white"
+              className="bg-marine-blue text-white hover:opacity-70"
               type="button"
               onClick={handleNext}
             >
@@ -29,7 +29,10 @@ const ActionPanel = () => {
             </Button>
           )}
           {currentFormStep === 4 && (
-            <Button className="bg-marine-blue text-white" type="submit">
+            <Button
+              className="bg-purplish-blue text-white hover:opacity-70"
+              type="submit"
+            >
               Confirm
             </Button>
           )}
@@ -38,7 +41,7 @@ const ActionPanel = () => {
       {currentFormStep === 1 && (
         <div className="md:p-0 text-lg font-semibold flex justify-end items-center w-full bg-white p-2">
           <Button
-            className="bg-marine-blue text-white"
+            className="bg-marine-blue text-white hover:opacity-70"
             type="button"
             onClick={handleNext}
           >

@@ -13,14 +13,19 @@ import {
   useForm,
 } from "react-hook-form";
 
-export interface MultiStepFormData {
-  username: string;
-  emailAddress: string;
-  phoneNumber: string;
-  subscription: string;
-  isYearly: boolean;
-  addOns: string[];
-}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const FormSchema = z.object({
+  username: z.string().min(1, "Username is required"),
+  emailAddress: z.string().email("Email is required"),
+  phoneNumber: z.string().min(10, "Invalid phone number"),
+  subscription: z.string(),
+  isYearly: z.boolean(),
+  addOns: z.array(z.string()),
+});
+
+export type MultiStepFormData = z.infer<typeof FormSchema>;
 
 export interface FormContextReturnProps extends useHandleStepsReturnType {
   form: UseFormReturn<MultiStepFormData, any, undefined>;
@@ -37,6 +42,7 @@ export const FormContext = createContext<FormContextReturnProps>(
 
 export const FormContextProvider = ({ children }: { children: ReactNode }) => {
   const form = useForm<MultiStepFormData>({
+    resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",
       emailAddress: "",
@@ -45,6 +51,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
       isYearly: false,
       addOns: ["Online service", "Larger storage"],
     },
+    mode: "onBlur",
   });
   const {
     register,

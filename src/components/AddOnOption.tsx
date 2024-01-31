@@ -26,7 +26,7 @@ const AddOnOption: React.FC<AddOnOptionProps> = ({
         <div
           className={`flex justify-between items-center  border-2 rounded-lg px-5 py-3  ${
             selected ? "bg-slate-100 border-purplish-blue" : "border-light-gray"
-          }`}
+          } hover:border-purplish-blue`}
         >
           <div className="flex gap-4 items-center">
             <FormControl>
@@ -37,7 +37,7 @@ const AddOnOption: React.FC<AddOnOptionProps> = ({
                   return checked
                     ? field.onChange([...field.value, title])
                     : field.onChange(
-                        field.value?.filter((value) => value !== title)
+                        field.value?.filter((value: string) => value !== title)
                       );
                 }}
               />
