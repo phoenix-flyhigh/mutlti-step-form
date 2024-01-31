@@ -1,5 +1,6 @@
 import React from "react";
 import { Checkbox } from "./ui/checkbox";
+import { Label } from "./ui/label";
 
 interface AddOnOptionProps {
   title: string;
@@ -21,11 +22,15 @@ const AddOnOption: React.FC<AddOnOptionProps> = ({
       }`}
     >
       <div className="flex gap-4 items-center">
-        <Checkbox checked />
-        <div className="flex flex-col">
-          <p className="text-md md:text-lg font-semibold text-marine-blue">{title}</p>
-          <p className="text-sm md:text-md text-cool-gray">{description}</p>
-        </div>
+        <Checkbox id={title}/>
+        <Label htmlFor={title}>
+          <div className="flex flex-col">
+            <p className="text-md md:text-lg font-semibold text-marine-blue">
+              {title}
+            </p>
+            <p className="text-sm md:text-md text-cool-gray">{description}</p>L
+          </div>
+        </Label>
       </div>
       <p className="text-purplish-blue">+{cost}</p>
     </div>
