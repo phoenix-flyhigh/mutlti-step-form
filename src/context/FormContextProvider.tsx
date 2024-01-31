@@ -7,15 +7,22 @@ import {
   FieldErrors,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormReturn,
   UseFormWatch,
   useForm,
 } from "react-hook-form";
 
 export interface MultiStepFormData {
   username: string;
+  emailAddress: string;
+  phoneNumber: string;
+  subscription: string;
+  isYearly: boolean;
+  addOns: string[];
 }
 
 export interface FormContextReturnProps extends useHandleStepsReturnType {
+  form: UseFormReturn<MultiStepFormData, any, undefined>;
   register: UseFormRegister<MultiStepFormData>;
   handleSubmit: UseFormHandleSubmit<MultiStepFormData, undefined>;
   watch: UseFormWatch<MultiStepFormData>;
@@ -27,19 +34,29 @@ export const FormContext = createContext<FormContextReturnProps>(
 );
 
 export const FormContextProvider = ({ children }: { children: ReactNode }) => {
+  const form = useForm<MultiStepFormData>({
+    defaultValues: {
+      username: "",
+      emailAddress: "",
+      phoneNumber: "",
+      subscription: "",
+      isYearly: false,
+      addOns: [],
+    },
+  });
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<MultiStepFormData>();
-
+  } = form;
   const { currentFormStep, handleGoBack, handleNext } = useHandleSteps();
 
-  const contextValue = {
+  const contextValue: FormContextReturnProps = {
     currentFormStep,
     handleGoBack,
     handleNext,
+    form,
     register,
     handleSubmit,
     watch,

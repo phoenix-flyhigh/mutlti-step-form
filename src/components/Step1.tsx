@@ -39,6 +39,7 @@ const Step1 = () => {
             type="email"
             id="email"
             placeholder="e.g. stephanking@lorem.com"
+            {...register("emailAddress")}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -52,6 +53,7 @@ const Step1 = () => {
             type="number"
             id="phoneNumber"
             placeholder="e.g. +1 234 567 890"
+            {...register("phoneNumber")}
           />
         </div>
       </div>
