@@ -1,8 +1,12 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import StepHeader from "./StepHeader";
+import { FormContext } from "@/context/FormContextProvider";
+import { useContext } from "react";
 
 const Step1 = () => {
+  const { register } = useContext(FormContext);
+
   return (
     <>
       <StepHeader
@@ -17,7 +21,12 @@ const Step1 = () => {
           >
             Name
           </Label>
-          <Input type="text" id="name" placeholder="e.g. Stephan King" />
+          <Input
+            type="text"
+            id="name"
+            placeholder="e.g. Stephan King"
+            {...register("username")}
+          />
         </div>
         <div className="flex flex-col gap-2">
           <Label
