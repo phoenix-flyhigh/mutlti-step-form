@@ -19,7 +19,10 @@ import { z } from "zod";
 const FormSchema = z.object({
   username: z.string().min(1, "Username is required"),
   emailAddress: z.string().email("Email is required"),
-  phoneNumber: z.string().min(10, "Invalid phone number"),
+  phoneNumber: z
+    .string()
+    .min(10, "Invalid phone number")
+    .max(10, "Invalid phone number"),
   subscription: z.string(),
   isYearly: z.boolean(),
   addOns: z.array(z.string()),
@@ -35,6 +38,7 @@ export interface FormContextReturnProps extends useHandleStepsReturnType {
   getValues: UseFormGetValues<MultiStepFormData>;
   errors: FieldErrors<MultiStepFormData>;
   isSubmitSuccessful: boolean;
+  isValid: boolean;
 }
 
 export const FormContext = createContext<FormContextReturnProps>(
@@ -59,7 +63,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     handleSubmit,
     watch,
     getValues,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful, isValid },
   } = form;
   const { currentFormStep, handleGoBack, handleNext } = useHandleSteps();
 
@@ -74,6 +78,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     getValues,
     errors,
     isSubmitSuccessful,
+    isValid,
   };
 
   return (

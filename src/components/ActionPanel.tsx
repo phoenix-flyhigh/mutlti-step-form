@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FormContext } from "@/context/FormContextProvider";
 
 const ActionPanel = () => {
-  const { currentFormStep, handleGoBack, handleNext } = useContext(FormContext);
+  const { currentFormStep, handleGoBack, handleNext, isValid } = useContext(FormContext);
 
   return (
     <>
@@ -28,6 +28,7 @@ const ActionPanel = () => {
               Next Step
             </Button>
           )}
+          {currentFormStep === 4 && !isValid && <p className="text-sm text-strawberry-red font-medium">Errors in form input!</p>}
           {currentFormStep === 4 && (
             <Button
               className="bg-purplish-blue text-white hover:opacity-70"
